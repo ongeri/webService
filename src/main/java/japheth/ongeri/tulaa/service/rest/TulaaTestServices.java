@@ -2,9 +2,9 @@ package japheth.ongeri.tulaa.service.rest;
 
 import io.swagger.annotations.Api;
 import japheth.ongeri.tulaa.operations.StringReverser;
-import japheth.ongeri.tulaa.operations.TripletSums;
+import japheth.ongeri.tulaa.operations.TripletSumsAndPythgorean;
 import japheth.ongeri.tulaa.service.dto.ReverseAlphaDTO;
-import japheth.ongeri.tulaa.service.dto.TripletSumsDTO;
+import japheth.ongeri.tulaa.service.dto.TripletsDTO;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.Consumes;
@@ -21,10 +21,10 @@ import java.util.HashSet;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 @Service
-public class CourseGroupService {
+public class TulaaTestServices {
 
     @POST
-    @Path("reverseAlphaDTO")
+    @Path("reverseAlpha")
     public Response getReversedAlpha(ReverseAlphaDTO reverseAlphaDTO) {
         Response response;
         try {
@@ -40,12 +40,27 @@ public class CourseGroupService {
 
     @POST
     @Path("tripletSums")
-    public Response getTripletSums(TripletSumsDTO tripletSumsDTO) {
+    public Response getTripletSums(TripletsDTO tripletsDTO) {
         Response response;
         try {
-            TripletSums tripletSums = new TripletSums();
-            tripletSumsDTO.setResultCount(tripletSums.countTriplets(new HashSet<>(tripletSumsDTO.getDistinctIntegers()), tripletSumsDTO.getSumValue()));
-            response = Response.ok(tripletSumsDTO).build();
+            TripletSumsAndPythgorean tripletSumsAndPythgorean = new TripletSumsAndPythgorean();
+            tripletsDTO.setResultCount(tripletSumsAndPythgorean.countTriplets(new HashSet<>(tripletsDTO.getDistinctIntegers()), tripletsDTO.getSumValue()));
+            response = Response.ok(tripletsDTO).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        return response;
+    }
+
+    @POST
+    @Path("pythagoreanTriplets")
+    public Response checkPythagoreanTriplets(TripletsDTO tripletsDTO) {
+        Response response;
+        try {
+            TripletSumsAndPythgorean tripletSumsAndPythgorean = new TripletSumsAndPythgorean();
+            tripletsDTO.setHasPythagoreanTriplets(tripletSumsAndPythgorean.findPythagoreanTriplets(tripletsDTO.getDistinctIntegers()));
+            response = Response.ok(tripletsDTO).build();
         } catch (Exception e) {
             e.printStackTrace();
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

@@ -2,12 +2,13 @@ package japheth.ongeri.tulaa.service.dto;
 
 import java.util.List;
 
-public class TripletSumsDTO {
+public class TripletsDTO {
     private List<Integer> distinctIntegers;
     private int sumValue;
     private int resultCount;
+    private boolean hasPythagoreanTriplets;
 
-    public TripletSumsDTO() {
+    public TripletsDTO() {
     }
 
     public List<Integer> getDistinctIntegers() {
@@ -32,5 +33,13 @@ public class TripletSumsDTO {
 
     public void setResultCount(int resultCount) {
         this.resultCount = resultCount;
+    }
+
+    public boolean isHasPythagoreanTriplets() {
+        return hasPythagoreanTriplets;
+    }
+
+    public void setHasPythagoreanTriplets(boolean hasPythagoreanTriplets) {
+        this.hasPythagoreanTriplets = hasPythagoreanTriplets;
     }
 }
