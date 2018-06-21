@@ -1,8 +1,8 @@
 package japheth.ongeri.tulaa.service.dto;
 
-public class ReverseAlpha {
-    public String inputString;
-    public String outputString;
+public class ReverseAlphaDTO {
+    private String inputString;
+    private String outputString;
 
     public String getInputString() {
         return inputString;
